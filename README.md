@@ -1,7 +1,11 @@
 git clone https://github.com/Dalgat-98/exchange-rate-charts.git
+
 cd exchange-rate-charts.git
+
 npm i
+
 npm start
+
 npm test
 
 
