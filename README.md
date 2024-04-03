@@ -1,3 +1,10 @@
+git clone https://github.com/Dalgat-98/exchange-rate-charts.git
+cd exchange-rate-charts.git
+npm i
+npm start
+npm test
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
