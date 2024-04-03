@@ -1,0 +1,21 @@
+.valute-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .valute-list__item {
+    display: flex;
+    gap: 5px;
+
+    input {
+    }
+
+    label {
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 120%;
+      color: #3f4765;
+    }
+  }
+}
