@@ -2,11 +2,27 @@ import { calculateCountDays } from "../util/calculateCountDays/calculateCountDay
 
 // Делаем запрос
 async function load(url: string) {
-  const response = await fetch(url);
-  const data = await response.json();
+  let isLoading = true;
+  let data = null;
 
-  return data;
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Ошибка загрузки: ${response.statusText}`);
+    }
+
+    data = await response.json();
+  } catch (error) {
+    console.error("Ошибка загрузки:", error);
+  } finally {
+    isLoading = false;
+  }
+
+  return { data, isLoading };
 }
+
+const apiKey = "En2uPI96Gir70YKg9qjFgJHY6mCb2tbk";
 
 // Загрузка всех дней
 export async function daysData(start: Date, end: Date, url: string) {
@@ -14,7 +30,7 @@ export async function daysData(start: Date, end: Date, url: string) {
   const newDataValute = [{ date: "", rub: {} }];
   const arrayDate = [start.toLocaleDateString().split(".").reverse().join("-")];
 
-  for (let i = 1; i < countDay; i++) {
+  for (let i = 0; i < countDay; i++) {
     arrayDate.push(
       new Date(start.valueOf() + 1000 * 60 * 60 * 24 * i)
         .toLocaleDateString()
@@ -26,7 +42,7 @@ export async function daysData(start: Date, end: Date, url: string) {
 
   for (let i = 0; i < arrayDate.length; i++) {
     newDataValute.push(
-      await load(url + arrayDate[i] + "/v1/currencies/rub.json")
+      (await load(url + "&date=" + arrayDate[i] + "&api_key=" + apiKey)).data
     );
   }
 

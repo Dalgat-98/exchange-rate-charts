@@ -31,7 +31,10 @@ const ListCheckboxCurrency = <T extends React.ReactNode>({
 
   return (
     <>
-      <ul className="valute-list">{valuteList}</ul>
+      <ul className="valute-list">
+        {valuteList}
+        {valuteList.length < 1 && "Загрузка данных..."}
+      </ul>
     </>
   );
 };

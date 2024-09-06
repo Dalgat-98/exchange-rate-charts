@@ -4,7 +4,7 @@ import { LineChart } from "@mui/x-charts";
 import { Data, DataChartTypes } from "./../../types/types";
 
 type dataCurrencyDateProps = {
-  data: Data[];
+  data: any[];
   valute: string[];
 };
 
@@ -20,11 +20,12 @@ const DataChart = ({ data, valute }: dataCurrencyDateProps) => {
 
   for (let i = 1; i < data.length; i++) {
     dateData.push(data[i].date);
+    console.log(data[i].rates.rub);
     for (let item of valute) {
       if (!objectArray[item]) {
         objectArray[item] = [];
       }
-      objectArray[item].push(data[i].rub[item]);
+      objectArray[item].push(data[i].rates[item]);
     }
   }
 

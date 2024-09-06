@@ -5,13 +5,17 @@ import { daysData } from "./api/makeRequest";
 import { Data } from "./types/types";
 import { gettingLastWeek } from "./util/gettingLastWeek/gettingLastWeek";
 
+const baseCurrency = "RUB"; // Замените на нужную базовую валюту
+
 const Home = () => {
-  const [data, setData] = useState<Data[]>([]);
+  // const [data, setData] = useState<Data[]>([]);
+  const [data, setData] = useState<any[]>([]);
   const [valuteList, setvaluteList] = useState<string[]>([]);
   const [dateStartEnd, setDateStartEnd] = useState(gettingLastWeek);
   const [countRequests, setCountRequests] = useState(0);
 
-  const urlLoad = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@";
+  const urlLoad =
+    "https://api.currencybeacon.com/v1/historical?base=" + baseCurrency;
 
   // При изменений дат, вызываем функцию загрузки данных
   useEffect(() => {
@@ -69,7 +73,7 @@ const Home = () => {
       </header>
       <main className="main">
         <Form
-          valute={["eur", "usd", "cny"]}
+          valute={data.length > 0 ? ["EUR", "USD", "CNY"] : []}
           changeValute={changeValute}
           changeDateStart={changeDateStart}
           changeDateEnd={changeDateEnd}
